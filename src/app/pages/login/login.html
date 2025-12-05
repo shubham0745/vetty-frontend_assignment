@@ -1,0 +1,33 @@
+<div class="login-page">
+  <div class="login-card">
+    <h1 class="login-title">Log in</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <input
+        type="text"
+        class="login-input"
+        placeholder="Username"
+        formControlName="email"
+      />
+
+      <input
+        type="password"
+        class="login-input"
+        placeholder="Password"
+        formControlName="password"
+      />
+
+      <button type="submit" class="login-btn">
+        Log in
+      </button>
+
+      <div *ngIf="error" class="error-msg">
+        Invalid credentials. Use <b>admin@test.com</b> / <b>admin123</b>.
+      </div>
+    </form>
+
+    <p class="signup-text">
+      or, <span>sign up</span>
+    </p>
+  </div>
+</div>

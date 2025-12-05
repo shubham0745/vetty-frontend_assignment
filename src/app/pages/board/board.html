@@ -1,0 +1,188 @@
+<div class="jira-shell">
+  <!-- LEFT SIDEBAR -->
+  <aside class="jira-sidebar">
+    <h3 class="team-name">Design team</h3>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section">Roadmap</span>
+      <span class="nav-section active">Issues</span>
+      <span class="nav-section">Add item</span>
+      <span class="nav-section">Project settings</span>
+    </nav>
+  </aside>
+
+  <!-- RIGHT MAIN AREA -->
+  <div class="board-container">
+    <!-- Top header -->
+    <header class="board-header">
+      <div class="board-title">
+        <h2>✨ Jira board (Vetty) ✨</h2>
+        <p>Manage tasks across To Do, In Progress, Need Review & Completed.</p>
+      </div>
+
+      <button mat-stroked-button color="primary" (click)="logout()" class="logout-btn">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </header>
+
+    <!-- Four columns -->
+    <div class="columns">
+      <!-- ========== TO DO ========== -->
+      <mat-card class="column">
+        <div class="column-header">
+          <span>To do</span>
+          <div class="column-actions">
+            <span class="pill">{{ board.todo.length }}</span>
+            <button
+              mat-icon-button
+              (click)="openAddDialog('todo')"
+              aria-label="Add task to To Do"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          id="todo"
+          [cdkDropListData]="board.todo"
+          [cdkDropListConnectedTo]="connectedLists"
+          (cdkDropListDropped)="drop($event)"
+          class="column-body"
+        >
+          <div class="empty" *ngIf="board.todo.length === 0">No tasks</div>
+
+          <mat-card
+            class="task-card"
+            *ngFor="let task of board.todo; trackBy: trackById"
+            cdkDrag
+          >
+            <h4>{{ task.title }}</h4>
+            <small>#{{ task.id }}</small>
+            <p *ngIf="task.description">{{ task.description }}</p>
+            <small class="timestamp">Created: {{ task.createdAt }}</small>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <!-- ========== IN PROGRESS ========== -->
+      <mat-card class="column">
+        <div class="column-header">
+          <span>In progress</span>
+          <div class="column-actions">
+            <span class="pill">{{ board.inProgress.length }}</span>
+            <button
+              mat-icon-button
+              (click)="openAddDialog('in-progress')"
+              aria-label="Add task to In Progress"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          id="in-progress"
+          [cdkDropListData]="board.inProgress"
+          [cdkDropListConnectedTo]="connectedLists"
+          (cdkDropListDropped)="drop($event)"
+          class="column-body"
+        >
+          <div class="empty" *ngIf="board.inProgress.length === 0">No tasks</div>
+
+          <mat-card
+            class="task-card"
+            *ngFor="let task of board.inProgress; trackBy: trackById"
+            cdkDrag
+          >
+            <h4>{{ task.title }}</h4>
+            <small>#{{ task.id }}</small>
+            <p *ngIf="task.description">{{ task.description }}</p>
+            <small class="timestamp">Created: {{ task.createdAt }}</small>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <!-- ========== NEED REVIEW ========== -->
+      <mat-card class="column">
+        <div class="column-header">
+          <span>Need review</span>
+          <div class="column-actions">
+            <span class="pill">{{ board.needReview.length }}</span>
+            <button
+              mat-icon-button
+              (click)="openAddDialog('need-review')"
+              aria-label="Add task to Need Review"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          id="need-review"
+          [cdkDropListData]="board.needReview"
+          [cdkDropListConnectedTo]="connectedLists"
+          (cdkDropListDropped)="drop($event)"
+          class="column-body"
+        >
+          <div class="empty" *ngIf="board.needReview.length === 0">No tasks</div>
+
+          <mat-card
+            class="task-card"
+            *ngFor="let task of board.needReview; trackBy: trackById"
+            cdkDrag
+          >
+            <h4>{{ task.title }}</h4>
+            <small>#{{ task.id }}</small>
+            <p *ngIf="task.description">{{ task.description }}</p>
+            <small class="timestamp">Created: {{ task.createdAt }}</small>
+          </mat-card>
+        </div>
+      </mat-card>
+
+      <!-- ========== COMPLETED ========== -->
+      <mat-card class="column">
+        <div class="column-header">
+          <span>Completed</span>
+          <div class="column-actions">
+            <span class="pill">{{ board.completed.length }}</span>
+            <button
+              mat-icon-button
+              (click)="openAddDialog('completed')"
+              aria-label="Add task to Completed"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div
+          cdkDropList
+          id="completed"
+          [cdkDropListData]="board.completed"
+          [cdkDropListConnectedTo]="connectedLists"
+          (cdkDropListDropped)="drop($event)"
+          class="column-body"
+        >
+          <div class="empty" *ngIf="board.completed.length === 0">No tasks</div>
+
+          <mat-card
+            class="task-card"
+            *ngFor="let task of board.completed; trackBy: trackById"
+            cdkDrag
+          >
+            <h4>{{ task.title }}</h4>
+            <small>#{{ task.id }}</small>
+            <p *ngIf="task.description">{{ task.description }}</p>
+            <small class="timestamp">Created: {{ task.createdAt }}</small>
+          </mat-card>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

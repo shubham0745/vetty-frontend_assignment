@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Add Task</h2>
+
+<div mat-dialog-content class="dialog-content">
+  <form [formGroup]="taskForm" class="dialog-form">
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Task Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Task ID</mat-label>
+      <input matInput formControlName="id" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput rows="3" formControlName="description"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="save()" [disabled]="taskForm.invalid">
+    Add
+  </button>
+</div>
